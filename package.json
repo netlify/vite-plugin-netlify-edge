@@ -8,7 +8,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "build:demo": "npm run build:client && npm run build:ssr",
+    "build:client": "vite build demo",
+    "build:ssr": "vite build demo --ssr handler.js"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",

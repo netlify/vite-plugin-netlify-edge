@@ -79,10 +79,9 @@ export const handler = async (request, { next }) => {
   try {
     return await handleRequest(request)
   } catch (err) {
-    return {
-      body: 'Internal Server Error',
-      statusCode: 500,
-    }
+    return new Response(err.message || 'Internal Server Error', {
+      status: err.status || 500,
+    })
   }
 }
 ```
@@ -90,7 +89,7 @@ export const handler = async (request, { next }) => {
 You can then build it using the vite CLI:
 
 ```shell
-vite build --ssr = handler.js
+vite build --ssr handler.js
 ```
 
 This will generate the Edge Function `.netlify/edge-functions/handler/index.js` and a manifest file `.netlify/edge-functions/manifest.json` that defines the `handler` function.

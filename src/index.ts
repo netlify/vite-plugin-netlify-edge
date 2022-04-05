@@ -14,7 +14,7 @@ const netlifyEdge = ({
   generateStaticManifest = true,
   generateEdgeFunctionsManifest = true,
   additionalStaticPaths = [],
-}: NetlifyEdgePluginOptions): Plugin => {
+}: NetlifyEdgePluginOptions = {}): Plugin => {
   let resolvedConfig: ResolvedConfig
   let originalPublicDir: string
   const staticManifestModuleId = '@static-manifest'
@@ -29,6 +29,20 @@ const netlifyEdge = ({
         config.build.outDir ||= edgeFunctionsDir
         return {
           publicDir: false,
+          ssr: {
+            target: 'webworker',
+            noExternal: true,
+          },
+          output: {
+            format: 'es',
+          },
+          build: {
+            rollupOptions: {
+              output: {
+                format: 'es',
+              },
+            },
+          },
         }
       }
     },
@@ -44,9 +58,9 @@ const netlifyEdge = ({
       if (generateStaticManifest && id === resolvedStaticManifestModuleId) {
         const files = glob
           .sync('**/*', {
-            cwd: path.resolve(originalPublicDir),
+            cwd: path.resolve(resolvedConfig.root, originalPublicDir),
           })
-          .map((file) => `/${encodeURIComponent(file)}`)
+          .map((file) => `${resolvedConfig.base}${encodeURIComponent(file)}`)
 
         return `export default new Set(${JSON.stringify([
           ...files,

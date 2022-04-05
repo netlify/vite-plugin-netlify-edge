@@ -1,0 +1,3 @@
+[build]
+publish = "demo/dist"
+command = "npm run build:demo"
