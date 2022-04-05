@@ -1,0 +1,96 @@
+# vite-plugin-netlify-edge
+
+This plugin helps add support for generating Netlify Edge Functions. This is mostly intended for frameworks that need to generate a catch-all Edge Function to serve all requests.
+
+By default, it sets `outDir` to `.netlify/edge-functions/handler`, and generates an Edge Functions manifest that defines the `handler` function for all requests.
+
+To help with handling static files, it registers a virtual module called `@static-manifest` that exports a `Set` that includes the paths of all files in `publicDir`. This can be used in the handler to identify requests for static files.
+
+# Usage
+
+Install the plugin:
+
+```shell
+npm i -D @netlify-labs/vite-plugin-netlify-edge
+```
+
+Then add the following to your `.vite.config.js`:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import netlifyEdge from '@netlify-labs/vite-plugin-netlify-edge'
+
+export default defineConfig({
+  plugins: [netlifyEdge()],
+})
+```
+
+You can disable any of these features by passing options to the `netlifyEdge()` function:
+
+```js
+// vite.config.js
+
+// ...
+export default defineConfig({
+  plugins: [netlifyEdge({ generateEdgeFunctionsManifest: false })],
+})
+```
+
+You can pass additional static paths to the plugin, so that they are also included. They are paths not filenames, so should include a leading slash and be URL-encoded.
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import netlifyEdge from '@netlify-labs/vite-plugin-netlify-edge'
+import glob from 'fast-glob'
+
+export default defineConfig({
+  plugins: [
+    netlifyEdge({
+      additionalStaticPaths: glob
+        .sync('**/*.{js,css}', { cwd: 'dist/client' })
+        .map((path) => `/${encodeURI(path)}`),
+    }),
+  ],
+})
+```
+
+If you need to add all paths under a directory then it is likely to be more efficient to check the prefix instead of adding all files individually. See the example below, where every path under `/assets/` is served from the CDN.
+
+In order to use this plugin to create Edge Functions you must define an SSR entrypoint:
+
+```js
+// handler.js
+import { handleRequest } from 'my-framework'
+import staticFiles from '@static-manifest'
+
+export const handler = async (request, { next }) => {
+  // Handle static files
+
+  const { pathname } = new URL(request.url)
+
+  // If your framework generates client assets in a subdirectory, you can add these too
+  if (staticFiles.includes(pathname) || pathname.startsWith('assets/')) {
+    return next()
+  }
+
+  // "handleRequest" is defined by your framework
+  try {
+    return await handleRequest(request)
+  } catch (err) {
+    return {
+      body: 'Internal Server Error',
+      statusCode: 500,
+    }
+  }
+}
+```
+
+You can then build it using the vite CLI:
+
+```shell
+vite build --ssr = handler.js
+```
+
+This will generate the Edge Function `.netlify/edge-functions/handler/index.js` and a manifest file `.netlify/edge-functions/manifest.json` that defines the `handler` function.
