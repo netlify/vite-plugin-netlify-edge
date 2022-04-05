@@ -1,6 +1,6 @@
 {
   "name": "@netlify-labs/vite-plugin-netlify-edge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vite support for Netlify Edge Function",
   "module": "dist/index.js",
   "author": "Matt Kane <matt.kane@netlify.com>",
