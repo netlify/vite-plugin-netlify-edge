@@ -2,13 +2,19 @@
   "name": "@netlify-labs/vite-plugin-netlify-edge",
   "version": "0.0.3",
   "description": "Vite support for Netlify Edge Function",
-  "module": "dist/index.js",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "author": "Matt Kane <matt.kane@netlify.com>",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format esm,cjs --dts ",
     "prepublishOnly": "npm run build",
     "build:demo": "npm run build:client && npm run build:ssr",
     "build:client": "vite build demo",
@@ -19,6 +25,7 @@
   ],
   "devDependencies": {
     "@types/node": "^17.0.23",
+    "tsup": "^5.12.4",
     "typescript": "^4.6.3",
     "vite": "^2.9.1"
   },
