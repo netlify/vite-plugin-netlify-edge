@@ -1,5 +1,5 @@
 {
-  "name": "@netlify-labs/vite-plugin-netlify-edge",
+  "name": "@netlify/vite-plugin-netlify-edge",
   "version": "0.0.4",
   "description": "Vite support for Netlify Edge Function",
   "main": "./dist/index.js",
@@ -35,5 +35,5 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": "git@github.com:netlify-labs/vite-plugin-netlify-edge.git"
+  "repository": "git@github.com:netlify/vite-plugin-netlify-edge.git"
 }
