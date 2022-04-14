@@ -11,7 +11,7 @@ To help with handling static files, it registers a virtual module called `@stati
 Install the plugin:
 
 ```shell
-npm i -D @netlify-labs/vite-plugin-netlify-edge
+npm i -D @netlify/vite-plugin-netlify-edge
 ```
 
 Then add the following to your `.vite.config.js`:
@@ -19,7 +19,7 @@ Then add the following to your `.vite.config.js`:
 ```js
 // vite.config.js
 import { defineConfig } from 'vite'
-import netlifyEdge from '@netlify-labs/vite-plugin-netlify-edge'
+import netlifyEdge from '@netlify/vite-plugin-netlify-edge'
 
 export default defineConfig({
   plugins: [netlifyEdge()],
@@ -42,7 +42,7 @@ You can pass additional static paths to the plugin, so that they are also includ
 ```js
 // vite.config.js
 import { defineConfig } from 'vite'
-import netlifyEdge from '@netlify-labs/vite-plugin-netlify-edge'
+import netlifyEdge from '@netlify/vite-plugin-netlify-edge'
 import glob from 'fast-glob'
 
 export default defineConfig({
