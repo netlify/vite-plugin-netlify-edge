@@ -72,7 +72,7 @@ export const handler = async (request, { next }) => {
 
   // If your framework generates client assets in a subdirectory, you can add these too
   if (staticFiles.includes(pathname) || pathname.startsWith('assets/')) {
-    return next()
+    return
   }
 
   // "handleRequest" is defined by your framework
