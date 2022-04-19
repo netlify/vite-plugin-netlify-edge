@@ -1,6 +1,6 @@
 {
   "name": "@netlify/vite-plugin-netlify-edge",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "Vite support for Netlify Edge Function",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -32,8 +32,16 @@
   "dependencies": {
     "fast-glob": "^3.2.11"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/netlify/vite-plugin-netlify-edge.git"
   },
-  "repository": "git@github.com:netlify/vite-plugin-netlify-edge.git"
+  "bugs": {
+    "url": "https://github.com/netlify/vite-plugin-netlify-edge/issues"
+  },
+  "homepage": "https://github.com/netlify/vite-plugin-netlify-edge#readme",
+  "keywords": [
+    "vite-plugin",
+    "vite"
+  ]
 }
