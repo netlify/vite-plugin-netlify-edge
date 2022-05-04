@@ -7,7 +7,7 @@ import glob from 'fast-glob'
 export interface NetlifyEdgePluginOptions {
   generateStaticManifest?: boolean
   generateEdgeFunctionsManifest?: boolean
-  additionalStaticPaths?: Array<string>
+  additionalStaticPaths?: Array<string> | ((config: ResolvedConfig) => [])
 }
 
 const netlifyEdge = ({
@@ -62,9 +62,14 @@ const netlifyEdge = ({
           })
           .map((file) => `${resolvedConfig.base}${encodeURIComponent(file)}`)
 
+        const additional =
+          additionalStaticPaths instanceof Function
+            ? additionalStaticPaths(resolvedConfig)
+            : additionalStaticPaths
+
         return `export default new Set(${JSON.stringify([
           ...files,
-          ...additionalStaticPaths,
+          ...additional,
         ])})`
       }
     },
