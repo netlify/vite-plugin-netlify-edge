@@ -7,7 +7,9 @@ import glob from 'fast-glob'
 export interface NetlifyEdgePluginOptions {
   generateStaticManifest?: boolean
   generateEdgeFunctionsManifest?: boolean
-  additionalStaticPaths?: Array<string> | ((config: ResolvedConfig) => string[])
+  additionalStaticPaths?:
+    | Array<string>
+    | ((config: ResolvedConfig) => Array<string>)
 }
 
 const netlifyEdge = ({
