@@ -1,6 +1,6 @@
 {
   "name": "@netlify/vite-plugin-netlify-edge",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Vite support for Netlify Edge Function",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
