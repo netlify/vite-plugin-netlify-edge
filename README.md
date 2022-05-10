@@ -37,7 +37,9 @@ export default defineConfig({
 })
 ```
 
-You can pass additional static paths to the plugin, so that they are also included. They are paths not filenames, so should include a leading slash and be URL-encoded.
+You can pass an array of additional static paths to the plugin, so that they are also included. They are paths not filenames, so should include a leading slash and be URL-encoded.
+
+In addition, `additionalStaticPaths` also accepts a function that receives a param containing the resolved Vite config and returns an array of additional static paths, as above.
 
 ```js
 // vite.config.js
