@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/netlify/vite-plugin-netlify-edge/compare/v1.0.0...v1.1.0) (2022-05-11)
+
+
+### Features
+
+* allow custom function name ([c3beb84](https://github.com/netlify/vite-plugin-netlify-edge/commit/c3beb84fba5d7f33115d987c153e6e5dc9b8fc31))
+
 ## 1.0.0 (2022-05-09)
 
 
