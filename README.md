@@ -2,10 +2,6 @@
 
 This plugin helps add support for generating Netlify Edge Functions. This is mostly intended for frameworks that need to generate a catch-all Edge Function to serve all requests.
 
-By default, it sets `outDir` to `.netlify/edge-functions/handler`, and generates an Edge Functions manifest that defines the `handler` function for all requests.
-
-To help with handling static files, it registers a virtual module called `@static-manifest` that exports a `Set` that includes the paths of all files in `publicDir`. This can be used in the handler to identify requests for static files.
-
 # Usage
 
 Install the plugin:
@@ -26,7 +22,25 @@ export default defineConfig({
 })
 ```
 
-You can disable any of these features by passing options to the `netlifyEdge()` function:
+By default, it sets `outDir` to `.netlify/edge-functions/handler`, and generates an Edge Functions manifest that defines the `handler` function for all requests.
+Passing a value to `functionName` will override this. This will affect the generated manifest and the base directory for the output, but it will not affect the names of the generated bundles. For this reason you should ensure that your entrypoint file is named the same as the function name.
+
+```js
+// vite.config.js
+
+// ...
+export default defineConfig({
+  plugins: [netlifyEdge({ functionName: 'server' })],
+})
+```
+
+This generates the file inside `.netlify/edge-functions/server`, and creates a manifest pointing to the `server` function.
+
+### Static file handling
+
+To help with handling static files, it registers a virtual module called `@static-manifest` that exports a `Set` that includes the paths of all files in `publicDir`. This can be used in the handler to identify requests for static files.
+
+You can disable any of this feature by passing options to the `netlifyEdge()` function:
 
 ```js
 // vite.config.js
@@ -92,4 +106,4 @@ You can then build it using the vite CLI:
 vite build --ssr handler.js
 ```
 
-This will generate the Edge Function `.netlify/edge-functions/handler/index.js` and a manifest file `.netlify/edge-functions/manifest.json` that defines the `handler` function.
+This will generate the Edge Function `.netlify/edge-functions/handler/handler.js` and a manifest file `.netlify/edge-functions/manifest.json` that defines the `handler` function.
