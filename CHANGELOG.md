@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/netlify/vite-plugin-netlify-edge/compare/v1.1.1...v1.1.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* remove uri encoding from manifest ([9af3fbd](https://github.com/netlify/vite-plugin-netlify-edge/commit/9af3fbdab99bf10114f7a99e3b963f6bf907cf35))
+
 ## [1.1.1](https://github.com/netlify/vite-plugin-netlify-edge/compare/v1.1.0...v1.1.1) (2022-10-03)
 
 
