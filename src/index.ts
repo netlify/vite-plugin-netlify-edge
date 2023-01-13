@@ -62,7 +62,7 @@ const netlifyEdge = ({
           .sync('**/*', {
             cwd: path.resolve(resolvedConfig.root, originalPublicDir),
           })
-          .map((file) => `${resolvedConfig.base}${encodeURIComponent(file)}`)
+          .map((file) => `${resolvedConfig.base}${file}`)
 
         return `export default new Set(${JSON.stringify([
           ...files,
