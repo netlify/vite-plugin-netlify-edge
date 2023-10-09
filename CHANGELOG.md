@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/netlify/vite-plugin-netlify-edge/compare/v1.1.2...v1.1.3) (2023-10-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fast-glob to v3.3.0 ([ac9456f](https://github.com/netlify/vite-plugin-netlify-edge/commit/ac9456ff178d552f69f1922ad154a81800c865bd))
+* **deps:** update dependency fast-glob to v3.3.1 ([861b6c4](https://github.com/netlify/vite-plugin-netlify-edge/commit/861b6c4f89001db7ca36196db9dbf8b7d050d503))
+
 ## [1.1.2](https://github.com/netlify/vite-plugin-netlify-edge/compare/v1.1.1...v1.1.2) (2023-01-13)
 
 
